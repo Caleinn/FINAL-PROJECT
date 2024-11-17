@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Feedback Form</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #1a001a, #330033, #4d004d);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Container Styling */
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background-color: rgba(26, 0, 26, 0.85); /* Transparent dark background */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(255, 51, 153, 0.7);
+            text-align: center;
+            transform: translateY(-50px);
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Header Styling */
+        h1 {
+            font-size: 2em;
+            color: #ff3399; 
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        /* Label and Input Styling */
+        label {
+            font-size: 1.1em;
+            text-align: left;
+            color:#ff3399; /* White text */
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: border 0.3s ease-in-out;
+            height: 150px;
+            resize: vertical;
+            color: white; /* White text */
+            background-color: rgba(0, 0, 0, 0.3); /* Slightly darker background for textarea */
+        }
+
+        /* Focus Effect */
+        textarea:focus {
+            border: 2px solid #4e73df;
+            outline: none;
+        }
+
+        /* Submit Button Styling */
+        button[type="submit"] {
+            background-color: #ff3399;
+            color: #1A001A;
+            padding: 12px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        /* Hover Effect on Submit Button */
+        button[type="submit"]:hover {
+            background-color: #ff3399;
+        }
+
+        /* Back Button Styling */
+        .back-button {
+            background-color: #ff3399;
+            border: none;
+            color: #1A001A;
+            font-size: 1.5em;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #ff3399;
+            color: #1A001A;
+        }
+
+        /* Thank You Message Styling (Pop-up at bottom-right) */
+        .thank-you {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ff3399;
+            color: #1A001A;
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            display: none;
+            font-size: 1em;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                width: 90%;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            button {
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Teacher Feedback Form</h1>
+        <form id="feedback-form" action="submit_feedback.php" method="POST">
+            <label for="feedback">Your Feedback:</label>
+            <textarea id="feedback" name="feedback" required></textarea>
+
+            <button type="submit" class = "submit feebback-button" onclick="goSubmit();">Submit Feedback</button>
+
+            <!-- Back Button Below Submit Button -->
+            <button type="button" class="back-button" onclick="goBack();">Back</button>
+        </form>
+    </div>
+    <script>
+        function goBack() {
+            window.location.href = 'student_login.html';  
+        }
+    </script>
+
+    <div class="thank-you" id="thank-you-message">
+        <h2>Thank you for your feedback!</h2>
+    </div>
+
+    <script>
+        const form = document.getElementById('feedback-form');
+        const thankYouMessage = document.getElementById('thank-you-message');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevents the form from submitting immediately
+
+            // Display thank you message in the bottom-right
+            thankYouMessage.style.display = 'block';
+
+            // Hide the message after 3 seconds
+            setTimeout(function() {
+                thankYouMessage.style.display = 'none';
+            }, 3000);
+        });
+    </script>
+
+
+<script>
+    
+    const feedbackTextarea = document.getElementById('feedback');
+    
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Show the thank-you message
+        thankYouMessage.style.display = 'block';
+
+        // Clear the textarea
+        feedbackTextarea.value = '';
+
+        // Hide the message after 3 seconds
+        setTimeout(function() {
+            thankYouMessage.style.display = 'none';
+        }, 3000);
+
+        // Submit the form using AJAX or proceed with normal submission
+        setTimeout(function() {
+            form.submit(); // Submit the form programmatically
+        }, 3000); // Delay submission to let the user see the message
+    });
+</script>
+
+
+    
+
+</body>
+</html>
