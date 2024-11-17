@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #1a001a, #330033, #4d004d);
+            font-family: 'Courier New', Courier, monospace;
+            color: white;
+            background-size: cover;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            background-color: rgba(26, 0, 26, 0.85);
+            border-radius: 12px;
+            box-shadow: 0px 4px 20px rgba(255, 51, 153, 0.7);
+            width: 350px;
+        }
+
+        h1 {
+            font-size: 2em;
+            color: #ff3399;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        label {
+            display: block;
+            font-size: 1.1em;
+            color: #ff3399;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            background-color: #ff3399;
+            color: #1A001A;
+            border: 2px solid #ff66b2;
+            border-radius: 6px;
+            font-size: 1em;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            transition: 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+            border-color: #6600cc;
+            outline: none;
+            box-shadow: 0 0 10px rgba(102, 0, 204, 0.6);
+        }
+
+        .button {
+            width: 45%;
+            padding: 12px;
+            background-color: #ff3399;
+            color: #1A001A;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            font-family: 'Courier New', Courier, monospace;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        
+        .button:hover {
+            background-color: #ff66b2;
+            transform: scale(1.05);
+        }
+
+      
+        .button:focus {
+            outline: none;
+            box-shadow: 0 0 8px rgba(255, 51, 153, 0.6);
+        }
+
+       
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+       
+        .error-message {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #FF6347; 
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 1em;
+            display: none;
+            box-shadow: 0px 4px 10px rgba(255, 99, 71, 0.7);
+            z-index: 1000;
+            animation: shake 0.5s ease-out; 
+        }
+
+        
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+        
+        .button:active {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Student Login</h1>
+        <form id="login-form">
+            <label for="Username">Username</label>
+            <input type="text" id="Username" name="Username" placeholder="Enter username" required>
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter password" required>
+            
+            <div class="button-container">
+                <!-- Back Button -->
+                <button type="button" class="button" onclick="goBack()">Back</button>
+               
+                <!-- Login Button -->
+                <button type="submit" class="button">Login</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Error message -->
+    <div id="error-message" class="error-message">Incorrect username and password. Please try again.</div>
+
+    <script>
+        // Back button function to navigate to mainboard.html
+        function goBack() {
+            window.location.href = 'mainboard.html';  
+        }
+
+        // Add event listener to handle login form submission
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            var Username = document.getElementById('Username').value;
+            var password = document.getElementById('password').value;
+
+            var validUsername = "cjbelen";
+            var validPassword = "jc";
+
+            // Check if the entered credentials match the valid ones
+            if (Username === validUsername && password === validPassword) {
+                window.location.href = 'dashboard.html'; // Redirect to dashboard
+            } else {
+                // Show error message if credentials are incorrect
+                var errorMessage = document.getElementById('error-message');
+                errorMessage.style.display = 'block';
+
+                // Hide the error message after 3 seconds
+                setTimeout(function() {
+                    errorMessage.style.display = 'none';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
